@@ -4,12 +4,44 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <style>
+      /* 기본 리셋 및 전체 배경 설정 */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        height: 100vh;
+        background: url("./background.jpg") no-repeat center center/cover;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Noto Sans", "Apple SD Gothic Neo", sans-serif;
+        color: white;
+        text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+        background-color: #111; /* 배경 이미지 없을 때 기본 */
+      }
+
+      h1 {
+        font-size: 3rem;
+        font-weight: 700;
+        padding: 1rem 2rem;
+        border: 1px solid white;
+        backdrop-filter: blur(5px);
+      }
+    </style>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <script>
-    window.location.href =
-      "kmembers://kyowon?push-intent-link=https://m.kwmembers.com/event/s_Event.do";
+    // window.location.href =
+    //   "kmembers://kyowon?push-intent-link=https://m.kwmembers.com/event/s_Event.do";
   </script>
   <body>
-    <h1>이동중입니다.</h1>
+    <h1>심지인 오늘도 술먹니?</h1>
   </body>
 </html>
