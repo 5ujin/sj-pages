@@ -47,8 +47,10 @@
 
         const appScheme = "kmembers://kyowon"; // ¾Û µö¸µÅ© ½ºÅ´
         const iosStoreUrl = "https://apps.apple.com/app/1499475538"; // iOS ¾Û½ºÅä¾î URL
+        // const androidStoreUrl =
+        //   "https://play.google.com/store/apps/details?id=com.kyowon.kmembers"; // Android ½ºÅä¾î URL
         const androidStoreUrl =
-          "https://play.google.com/store/apps/details?id=com.kyowon.kmembers"; // Android ½ºÅä¾î URL
+          "intent://details?id=com.kyowon.kmembers#Intent;scheme=market;package=com.android.vending;end;"; // Android ½ºÅä¾î URL
         const fallbackStoreUrl = isIOS ? iosStoreUrl : androidStoreUrl;
 
         const deepLinkUrl = `${appScheme}?push-intent-link=${encodeURIComponent(
