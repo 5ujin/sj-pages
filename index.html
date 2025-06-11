@@ -32,38 +32,36 @@
     </style>
     <script>
       document.addEventListener("DOMContentLoaded", () => {
-        // ï¿½ï¿½ï¿½ï¿½ URLï¿½ï¿½ï¿½ï¿½ 'link' ï¿½Ä¶ï¿½ï¿½ï¿½ï¿? ï¿½ï¿½ï¿½ï¿½
+        // ÇöÀç URL¿¡¼­ 'link' ÆÄ¶ó¹ÌÅÍ ÃßÃâ
         const urlParams = new URLSearchParams(window.location.search);
-        //const link = urlParams.get("link");
-        const link = "https://m.kwmembers.com/event/s_Event.do";
-
+        const link = urlParams.get("link");
         if (!link) {
           console.error("No 'link' parameter found in URL.");
           return;
         }
 
-        // ï¿½Ã·ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        // ÇÃ·§Æûº° ¼³Á¤
         const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
         const isAndroid = /Android/i.test(navigator.userAgent);
 
-        const appScheme = "kmembers://kyowon"; // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Å© ï¿½ï¿½Å´
-        const iosStoreUrl = "https://apps.apple.com/app/1499475538"; // iOS ï¿½Û½ï¿½ï¿½ï¿½ï¿? URL
+        const appScheme = "kmembers://kyowon"; // ¾Û µö¸µÅ© ½ºÅ´
+        const iosStoreUrl = "https://apps.apple.com/app/1499475538"; // iOS ¾Û½ºÅä¾î URL
         const androidStoreUrl =
-          "https://play.google.com/store/apps/details?id=com.kyowon.kmembers"; // Android ï¿½ï¿½ï¿½ï¿½ï¿? URL
+          "https://play.google.com/store/apps/details?id=com.kyowon.kmembers"; // Android ½ºÅä¾î URL
         const fallbackStoreUrl = isIOS ? iosStoreUrl : androidStoreUrl;
 
         const deepLinkUrl = `${appScheme}?push-intent-link=${encodeURIComponent(
           link
         )}`;
 
-        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å© ï¿½ï¿½ï¿½ï¿½
+        // ¼öµ¿ ¸µÅ© ¼³Á¤
         // Button actions
         document.getElementById("openAppButton").href = deepLinkUrl;
         document.getElementById("openStoreButton").href = fallbackStoreUrl;
         const manualLink = document.getElementById("manual-link");
 
         if (isIOS || isAndroid) {
-          // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ãµï¿½
+          // ¾Û ½ÇÇà ½Ãµµ
           // const startTime = Date.now();
           // const iframe = document.createElement("iframe");
           // iframe.style.display = "none";
@@ -73,21 +71,20 @@
             const startTime = Date.now();
             window.location.href = deepLinkUrl;
 
-            // ï¿½ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½
+            // ¾Û ¼³Ä¡ ¿©ºÎ È®ÀÎ
             setTimeout(() => {
               const elapsedTime = Date.now() - startTime;
 
-              // iOSï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Å© È£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ù·ï¿½ fallbackï¿½ï¿½ ï¿½ß»ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿? Ã³ï¿½ï¿½
+              // iOS¿¡¼­´Â µö¸µÅ© È£Ãâ ½ÇÆÐ ½Ã ¹Ù·Î fallbackÀÌ ¹ß»ýÇÏÁö ¾ÊÀ¸¹Ç·Î ½Ã°£ ±â¹ÝÀ¸·Î Ã³¸®
               if (elapsedTime < 2000) {
-                //window.location.href = fallbackStoreUrl;
-                document.getElementById("openStoreButton").click();
+                window.location.href = fallbackStoreUrl;
               }
-            }, 1500); // 1.5ï¿½ï¿½ ï¿½ï¿½ï¿? ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
+            }, 1500); // 1.5ÃÊ ´ë±â ÈÄ ½ºÅä¾î·Î ÀÌµ¿
           } catch (error) {
-            document.getElementById("openStoreButton").click();
+            window.location.href = fallbackStoreUrl;
           }
         } else {
-          // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´ï¿½ ï¿½Ã·ï¿½ï¿½ï¿½
+          // Áö¿øµÇÁö ¾Ê´Â ÇÃ·§Æû
           alert("This feature is only supported on iOS or Android devices.");
         }
       });
