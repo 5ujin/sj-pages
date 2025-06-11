@@ -2,68 +2,100 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <!-- <style>
-      /* 기본 리셋 및 전체 배경 설정 */
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      body {
-        height: 100vh;
-        background: url("./background.jpg") no-repeat center center/cover;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-family: "Noto Sans", "Apple SD Gothic Neo", sans-serif;
-        color: white;
-        text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
-        background-color: #111; /* 배경 이미지 없을 때 기본 */
-      }
-
-      h1 {
-        font-size: 3rem;
-        font-weight: 700;
-        padding: 1rem 2rem;
-        border: 1px solid white;
-        backdrop-filter: blur(5px);
-        animation: fadeDown 1s ease-out;
-      }
-
-      @keyframes fadeDown {
-        from {
-          opacity: 0;
-          transform: translateY(-30px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      @keyframes pulse {
-        0%,
-        100% {
-          transform: scale(1);
-        }
-        50% {
-          transform: scale(1.02);
-        }
-      }
-    </style> -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap"
-      rel="stylesheet"
+    <meta
+      http-equiv="Cache-Control"
+      content="no-cache, no-store, must-revalidate"
     />
+    <meta http-equiv="Expires" content="0" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Deep Link Handler</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        padding: 20px;
+      }
+      .button {
+        display: inline-block;
+        margin: 10px;
+        padding: 15px 25px;
+        font-size: 16px;
+        color: white;
+        background-color: #007bff;
+        text-decoration: none;
+        border-radius: 5px;
+      }
+      .button:hover {
+        background-color: #0056b3;
+      }
+    </style>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // 현재 URL에서 'link' 파라미터 추출
+        const urlParams = new URLSearchParams(window.location.search);
+        // const link = urlParams.get("link");
+        const link = "https://m.kwmembers.com/event/s_Event.do";
+        if (!link) {
+          console.error("No 'link' parameter found in URL.");
+          return;
+        }
+
+        // 플랫폼별 설정
+        const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+        const isAndroid = /Android/i.test(navigator.userAgent);
+
+        const appScheme = "kmembers://kyowon"; // 앱 딥링크 스킴
+        const iosStoreUrl = "https://apps.apple.com/app/1499475538"; // iOS 앱스토어 URL
+        const androidStoreUrl =
+          "https://play.google.com/store/apps/details?id=com.kyowon.kmembers"; // Android 스토어 URL
+        const fallbackStoreUrl = isIOS ? iosStoreUrl : androidStoreUrl;
+
+        const deepLinkUrl = `${appScheme}?push-intent-link=${encodeURIComponent(
+          link
+        )}`;
+
+        // 수동 링크 설정
+        // Button actions
+        document.getElementById("openAppButton").href = deepLinkUrl;
+        document.getElementById("openStoreButton").href = fallbackStoreUrl;
+        const manualLink = document.getElementById("manual-link");
+
+        if (isIOS || isAndroid) {
+          // 앱 실행 시도
+          // const startTime = Date.now();
+          // const iframe = document.createElement("iframe");
+          // iframe.style.display = "none";
+          // iframe.src = deepLinkUrl;
+          // document.body.appendChild(iframe);
+          try {
+            const startTime = Date.now();
+            window.location.href = deepLinkUrl;
+
+            // 앱 설치 여부 확인
+            setTimeout(() => {
+              const elapsedTime = Date.now() - startTime;
+
+              // iOS에서는 딥링크 호출 실패 시 바로 fallback이 발생하지 않으므로 시간 기반으로 처리
+              if (elapsedTime < 2000) {
+                window.location.href = fallbackStoreUrl;
+              }
+            }, 1500); // 1.5초 대기 후 스토어로 이동
+          } catch (error) {
+            window.location.href = fallbackStoreUrl;
+          }
+        } else {
+          // 지원되지 않는 플랫폼
+          alert("This feature is only supported on iOS or Android devices.");
+        }
+      });
+    </script>
   </head>
-  <script>
-    window.location.href =
-      "kmembers://kyowon?push-intent-link=https://m.kwmembers.com/event/s_Event.do";
-  </script>
   <body>
-    <!-- <h1>심지인 오늘도 술먹니?</h1> -->
+    <h1>Dynamic Link Handler</h1>
+    <p>Redirecting you to the app...</p>
+    <p>If nothing happens, use the buttons below:</p>
+    <a id="openAppButton" class="button" href="#">Open App</a>
+    <a id="openStoreButton" class="button" href="#">Go to Store</a>
   </body>
 </html>
