@@ -48,7 +48,7 @@
         const appScheme = "kmembers://kyowon"; // 앱 딥링크 스킴
         const iosStoreUrl = "https://apps.apple.com/app/1499475538"; // iOS 앱스토어 URL
         const androidStoreUrl =
-          "play.google.com/store/apps/details?id=com.kyowon.kmembers"; // Android 스토어 URL
+          "intent://#Intent;package=com.kyowon.kmembers;scheme=kyowon;end"; // Android 스토어 URL
         const fallbackStoreUrl = isIOS ? iosStoreUrl : androidStoreUrl;
 
         const deepLinkUrl = `${appScheme}?push-intent-link=${encodeURIComponent(
