@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <style>
+    <!-- <style>
       /* 기본 리셋 및 전체 배경 설정 */
       * {
         margin: 0;
@@ -30,18 +30,40 @@
         padding: 1rem 2rem;
         border: 1px solid white;
         backdrop-filter: blur(5px);
+        animation: fadeDown 1s ease-out;
       }
-    </style>
+
+      @keyframes fadeDown {
+        from {
+          opacity: 0;
+          transform: translateY(-30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.02);
+        }
+      }
+    </style> -->
     <link
       href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap"
       rel="stylesheet"
     />
   </head>
   <script>
-    // window.location.href =
-    //   "kmembers://kyowon?push-intent-link=https://m.kwmembers.com/event/s_Event.do";
+    window.location.href =
+      "kmembers://kyowon?push-intent-link=https://m.kwmembers.com/event/s_Event.do";
   </script>
   <body>
-    <h1>심지인 오늘도 술먹니?</h1>
+    <!-- <h1>심지인 오늘도 술먹니?</h1> -->
   </body>
 </html>
