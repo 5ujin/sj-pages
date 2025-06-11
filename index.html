@@ -46,8 +46,7 @@
 
         const appScheme = "kmembers://kyowon"; // 앱 딥링크 스킴
         const iosStoreUrl = "https://apps.apple.com/app/1499475538"; // iOS 앱스토어 URL
-        const androidStoreUrl =
-          "https://play.google.com/store/apps/details?id=com.kyowon.kmembers"; // Android 스토어 URL
+        const androidStoreUrl = "market://details?id=com.kyowon.kmembers"; // Android 스토어 URL
         const fallbackStoreUrl = isIOS ? iosStoreUrl : androidStoreUrl;
 
         const deepLinkUrl = `${appScheme}?push-intent-link=${encodeURIComponent(
@@ -77,11 +76,11 @@
 
               // iOS에서는 딥링크 호출 실패 시 바로 fallback이 발생하지 않으므로 시간 기반으로 처리
               if (elapsedTime < 2000) {
-                document.getElementById("openStoreButton").click();
+                window.location.href = fallbackStoreUrl;
               }
             }, 1500); // 1.5초 대기 후 스토어로 이동
           } catch (error) {
-            document.getElementById("openStoreButton").click();
+            window.location.href = fallbackStoreUrl;
           }
         } else {
           // 지원되지 않는 플랫폼
