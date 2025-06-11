@@ -34,7 +34,8 @@
       document.addEventListener("DOMContentLoaded", () => {
         // 현재 URL에서 'link' 파라미터 추출
         const urlParams = new URLSearchParams(window.location.search);
-        const link = urlParams.get("link");
+        // const link = urlParams.get("link");
+        const link = "https://m.kwmembers.com/event/s_Event.do";
         if (!link) {
           console.error("No 'link' parameter found in URL.");
           return;
