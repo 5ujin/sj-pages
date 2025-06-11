@@ -82,8 +82,8 @@
             // }
             // }, 1500); // 1.5초 대기 후 스토어로 이동
           } catch (error) {
-            window.location.href = fallbackStoreUrl;
-            // $("#openStoreButton").trigger("click");
+            // window.location.href = fallbackStoreUrl;
+            document.getElementById("openStoreButton").click();
           }
         } else {
           // 지원되지 않는 플랫폼
