@@ -32,39 +32,40 @@
     </style>
     <script>
       document.addEventListener("DOMContentLoaded", () => {
-        // ÇöÀç URL¿¡¼­ 'link' ÆÄ¶ó¹ÌÅÍ ÃßÃâ
+        // ï¿½ï¿½ï¿½ï¿½ URLï¿½ï¿½ï¿½ï¿½ 'link' ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         const urlParams = new URLSearchParams(window.location.search);
         // const link = urlParams.get("link");
-        const link = "https://m.kwmembers.com/event/s_Event.do";
+        const link =
+          "https://m.kwmembers.com/mall/alliance/s_AllianceMallView.do?goodsNo=S090210671&siteNo=1&storeNo=1&infwDispNo=094001001";
         if (!link) {
           console.error("No 'link' parameter found in URL.");
           return;
         }
 
-        // ÇÃ·§Æûº° ¼³Á¤
+        // ï¿½Ã·ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
         const isAndroid = /Android/i.test(navigator.userAgent);
 
-        const appScheme = "kmembers://kyowon"; // ¾Û µö¸µÅ© ½ºÅ´
-        const iosStoreUrl = "https://apps.apple.com/app/1499475538"; // iOS ¾Û½ºÅä¾î URL
+        const appScheme = "kmembers://kyowon"; // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Å© ï¿½ï¿½Å´
+        const iosStoreUrl = "https://apps.apple.com/app/1499475538"; // iOS ï¿½Û½ï¿½ï¿½ï¿½ï¿½ URL
         // const androidStoreUrl =
-        //   "https://play.google.com/store/apps/details?id=com.kyowon.kmembers"; // Android ½ºÅä¾î URL
+        //   "https://play.google.com/store/apps/details?id=com.kyowon.kmembers"; // Android ï¿½ï¿½ï¿½ï¿½ï¿½ URL
         const androidStoreUrl =
-          "intent://details?id=com.kyowon.kmembers#Intent;scheme=market;package=com.android.vending;end;"; // Android ½ºÅä¾î URL
+          "intent://details?id=com.kyowon.kmembers#Intent;scheme=market;package=com.android.vending;end;"; // Android ï¿½ï¿½ï¿½ï¿½ï¿½ URL
         const fallbackStoreUrl = isIOS ? iosStoreUrl : androidStoreUrl;
 
         const deepLinkUrl = `${appScheme}?push-intent-link=${encodeURIComponent(
           link
         )}`;
 
-        // ¼öµ¿ ¸µÅ© ¼³Á¤
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å© ï¿½ï¿½ï¿½ï¿½
         // Button actions
         document.getElementById("openAppButton").href = deepLinkUrl;
         document.getElementById("openStoreButton").href = fallbackStoreUrl;
         const manualLink = document.getElementById("manual-link");
 
         if (isIOS || isAndroid) {
-          // ¾Û ½ÇÇà ½Ãµµ
+          // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ãµï¿½
           // const startTime = Date.now();
           // const iframe = document.createElement("iframe");
           // iframe.style.display = "none";
@@ -74,20 +75,20 @@
             const startTime = Date.now();
             window.location.href = deepLinkUrl;
 
-            // ¾Û ¼³Ä¡ ¿©ºÎ È®ÀÎ
+            // ï¿½ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½
             setTimeout(() => {
               const elapsedTime = Date.now() - startTime;
 
-              // iOS¿¡¼­´Â µö¸µÅ© È£Ãâ ½ÇÆÐ ½Ã ¹Ù·Î fallbackÀÌ ¹ß»ýÇÏÁö ¾ÊÀ¸¹Ç·Î ½Ã°£ ±â¹ÝÀ¸·Î Ã³¸®
+              // iOSï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Å© È£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ù·ï¿½ fallbackï¿½ï¿½ ï¿½ß»ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
               if (elapsedTime < 2000) {
                 window.location.href = fallbackStoreUrl;
               }
-            }, 1500); // 1.5ÃÊ ´ë±â ÈÄ ½ºÅä¾î·Î ÀÌµ¿
+            }, 1500); // 1.5ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
           } catch (error) {
             window.location.href = fallbackStoreUrl;
           }
         } else {
-          // Áö¿øµÇÁö ¾Ê´Â ÇÃ·§Æû
+          // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´ï¿½ ï¿½Ã·ï¿½ï¿½ï¿½
           alert("This feature is only supported on iOS or Android devices.");
         }
       });
